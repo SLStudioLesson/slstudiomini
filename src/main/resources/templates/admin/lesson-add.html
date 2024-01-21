@@ -16,7 +16,7 @@
                         <div class="row">
                             <div class="col">
                                 <label for="course" class="form-label">コース選択</label>
-                                <select id="course" th:field="*{course.id}">
+                                <select id="course" th:field="*{course}">
                                     <option value="">コースを選択</option>
                                     <option th:each="course : ${courses}"
                                             th:value="${course.id}"
