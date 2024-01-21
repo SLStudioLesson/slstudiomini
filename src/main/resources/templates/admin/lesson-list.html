@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ja" th:replace="~{layout/admin/base :: layout(~{::title},~{::body/content()})}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SLStudio Mini 管理画面</title>
+</head>
+<body>
+    <h1>レッスン一覧</h1>
+
+    <div class="container-fluid">
+        <div class="row mb-3">
+            <div class="col">
+                <table class="table table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">コース名</th>
+                            <th scope="col">レッスン名</th>
+                            <th scope="col">レッスン説明</th>
+                            <th scope="col">操作</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="lesson : ${lessons}">
+                            <th scope="row" th:text="${lesson.id}"></th>
+                            <td th:text="${lesson.course.name}"></td>
+                            <td th:text="${lesson.name}"></td>
+                            <td th:text="${lesson.description}"></td>
+                            <td>
+                                <a th:href="@{/admin/lessons/edit/{id}(id=${lesson.id})}">編集</a>
+                            </td>
+                        </tr>
+                        </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+
+
+    <a href="/admin/lessons/add">新規レッスン作成</a>
+</body>
+</html>

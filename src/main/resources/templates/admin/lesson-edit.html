@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ja" th:replace="~{layout/admin/base :: layout(~{::title},~{::body/content()})}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SLStudio Mini 管理画面</title>
+</head>
+<body>
+    <h1>レッスン編集</h1>
+
+    <div class="container-fluid">
+        <div class="row mb-3">
+            <div class="col align-self-center">
+                <form th:action="@{/admin/lessons/edit}" method="post" th:object="${lesson}">
+                    <input type="hidden" th:field="*{id}">
+                    <div class="mb-3">
+                        <div class="row">
+                            <div class="col">
+                                <label for="course" class="form-label">コース選択</label>
+                                <select id="course" th:field="*{course.id}">
+                                    <option th:each="course : ${courses}"
+                                            th:value="${course.id}"
+                                            th:text="${course.name}"
+                                            th:selected="${course.id == lesson.course.id}">コース名</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <div class="row">
+                            <div class="col">
+                                <label for="name" class="form-label">レッスン名</label>
+                                <input type="text" class="form-control" th:field="*{name}" placeholder="レッスン名">
+                            </div>
+                            <div class="col"></div>
+                            <div class="col"></div>
+                        </div>
+                        
+                    </div>
+                    <div class="mb-3">
+                        <div class="row">
+                            <div class="col">
+                                <label for="description" class="form-label">レッスンの説明</label>
+                                <textarea class="form-control" id="description" th:field="*{description}" rows="3"></textarea>
+                            </div>
+                            <div class="col"></div>
+                            <div class="col"></div>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <div class="row">
+                            <div class="col">
+                                <label for="content" class="form-label">レッスンの内容</label>
+                                <textarea class="form-control" id="content" th:field="*{content}" rows="10"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-success">レッスン編集</button>
+                </form>
+
+            </div>
+        </div>
+        
+    </div>
+
+</body>
+</html>

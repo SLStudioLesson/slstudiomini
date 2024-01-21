@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ja" th:replace="~{layout/admin/base :: layout(~{::title},~{::body/content()})}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SLStudio Mini 管理画面</title>
+</head>
+<body>
+    <h1>コース編集</h1>
+
+    <div class="container-fluid">
+        <div class="row mb-3">
+            <div class="col align-self-center">
+                <form th:action="@{/admin/courses/edit}" method="post" th:object="${course}">
+                    <input type="hidden" th:field="*{id}">
+                    <div class="mb-3">
+                        <div class="row">
+                            <div class="col">
+                                <label for="name" class="form-label">コース名</label>
+                                <input type="text" class="form-control" th:field="*{name}" placeholder="コース名">
+                            </div>
+                            <div class="col"></div>
+                            <div class="col"></div>
+                        </div>
+                        
+                    </div>
+                    <div class="mb-3">
+                        <div class="row">
+                            <div class="col">
+                                <label for="description" class="form-label">コースの説明</label>
+                        <textarea class="form-control" id="description" th:field="*{description}" rows="3"></textarea>
+                            </div>
+                            <div class="col"></div>
+                            <div class="col"></div>
+                        </div>
+                        
+                    </div>
+                    <button type="submit" class="btn btn-success">コース編集</button>
+                </form>
+
+            </div>
+        </div>
+        
+    </div>
+
+</body>
+</html>
