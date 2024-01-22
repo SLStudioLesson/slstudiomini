@@ -9,7 +9,12 @@ import org.springframework.stereotype.Service;
 import com.example.slstudiomini.model.Course;
 import com.example.slstudiomini.repository.CourseRepository;
 
+import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityNotFoundException;
+import jakarta.persistence.PersistenceContext;
+import jakarta.persistence.criteria.CriteriaBuilder;
+import jakarta.persistence.criteria.CriteriaQuery;
+import jakarta.persistence.criteria.Root;
 import jakarta.transaction.Transactional;
 
 @Service
@@ -17,8 +22,18 @@ public class CourseService {
     @Autowired
     private CourseRepository courseRepository;
 
+    @PersistenceContext
+    private EntityManager entityManager;
+
     public List<Course> findAllCources(){
-        return courseRepository.findAll();
+        CriteriaBuilder cb = entityManager.getCriteriaBuilder();
+        CriteriaQuery<Course> cq = cb.createQuery(Course.class);
+
+        Root<Course> course = cq.from(Course.class);
+        cq.select(course);
+
+        return entityManager.createQuery(cq).getResultList();
+        //return courseRepository.findAll();
     }
 
     public Course findCourceById(Long id){

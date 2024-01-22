@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ja" th:replace="~{layout/admin/base :: layout(~{::title},~{::body/content()})}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SLStudio Mini 管理画面</title>
+</head>
+<body>
+    <h1>ユーザー一覧</h1>
+
+    <div class="container-fluid">
+        <div class="row mb-3">
+            <div class="col">
+                <table class="table table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">アカウント</th>
+                            <th scope="col">状態</th>
+                            <th scope="col">操作</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="user : ${users}">
+                            <th scope="row" th:text="${user.id}"></th>
+                            <td th:text="${user.username}"></td>
+                            <td th:text="${user.enabled}"></td>
+                            <td>
+                                <a th:href="@{/admin/users/edit/{id}(id=${user.id})}">編集</a>
+                            </td>
+                        </tr>
+                        </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+
+
+    <a href="/admin/users/add">新規ユーザー作成</a>
+</body>
+</html>

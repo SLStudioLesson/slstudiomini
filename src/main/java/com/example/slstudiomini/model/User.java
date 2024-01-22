@@ -12,6 +12,9 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
 
 @Entity
 @Table(name = "users")
@@ -22,10 +25,13 @@ public class User {
     private Long id;
 
     // アカウント
+    @Size(min = 4, max = 30, message="ユーザー名は4から30文字までにして下さい")
+    @NotNull
     @Column(nullable = false, unique = true)
     private String username;
     
     // パスワード
+    @Pattern(regexp = "^[a-zA-Z0-9\\-_./%$]+$", message="半角英数と一部の記号（-、_、.）のみしか使えません")
     @Column(nullable = false)
     private String password;
 

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ja" th:replace="~{layout/admin/base :: layout(~{::title},~{::body/content()})}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SLStudio Mini 管理画面</title>
+</head>
+<body>
+    <h1>ユーザーの追加</h1>
+
+    <div class="container-fluid">
+        <div class="row mb-3">
+            <div class="col align-self-center">
+                <form th:action="@{/admin/users/add}" method="post" th:object="${user}">
+                    <div class="mb-3">
+                        <div class="row">
+                            <div class="col">
+                                <label for="username" class="form-label">ユーザー名(ログインアカウント)</label>
+                                <input type="text" class="form-control" th:field="*{username}" placeholder="ユーザー名">
+                                <span class="text-danger" th:if="${#fields.hasErrors('username')}" th:errors="*{username}">Name Error</span>
+                            </div>
+                            <div class="col"></div>
+                            <div class="col"></div>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <div class="row">
+                            <div class="col">
+                                <label for="password" class="form-label">ログインパスワード</label>
+                                <input type="password" class="form-control" th:field="*{password}" placeholder="パスワード">
+                                <span class="text-danger" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Name Error</span>
+                            </div>
+                            <div class="col"></div>
+                            <div class="col"></div>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-success">ユーザーの作成</button>
+                </form>
+
+            </div>
+        </div>
+        
+    </div>
+
+</body>
+</html>

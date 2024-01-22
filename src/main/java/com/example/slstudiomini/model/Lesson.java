@@ -12,6 +12,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 @SQLRestriction("deleted_at IS NULL")
@@ -39,6 +40,7 @@ public class Lesson {
     @Column
     private LocalDateTime deletedAt;
 
+    @NotNull(message="コースの選択は必須です")
     @ManyToOne
     @JoinColumn(name = "course_id", nullable = false)
     private Course course;
