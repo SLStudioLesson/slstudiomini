@@ -38,6 +38,7 @@ public class SecurityConfig {
 																						.atCommonLocations()).permitAll()
                 // URL「/」にはログイン無しでもアクセスできる
                 // .requestMatchers("/").permitAll()
+                .requestMatchers("/api/**").permitAll()
                 // /study 以降のURLにはロールが「USER」のみアクセス出来る
                 .requestMatchers("/study").hasRole("USER")
                 // /admin 以降のURLにはロールが「ADMIN」のみアクセス出来る
