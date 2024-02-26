@@ -40,9 +40,9 @@ public class SecurityConfig {
                 // .requestMatchers("/").permitAll()
                 .requestMatchers("/api/**").permitAll()
                 // /study 以降のURLにはロールが「USER」のみアクセス出来る
-                .requestMatchers("/study").hasRole("USER")
+                .requestMatchers("/study/**").hasRole("USER")
                 // /admin 以降のURLにはロールが「ADMIN」のみアクセス出来る
-                .requestMatchers("/admin").hasRole("ADMIN")
+                .requestMatchers("/admin/**").hasRole("ADMIN")
                 .anyRequest().authenticated()
         );
         return http.build();
