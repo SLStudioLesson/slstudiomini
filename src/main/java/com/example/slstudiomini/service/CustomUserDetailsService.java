@@ -33,16 +33,15 @@ public class CustomUserDetailsService implements UserDetailsService {
         }
 
         Set<GrantedAuthority> grantedAuthorities = authorityRepository.findByUserId(user.getId())
-            .stream()
-            .map(authority -> new SimpleGrantedAuthority(authority.getAuthority()))
-            .collect(Collectors.toSet());
+                .stream()
+                .map(authority -> new SimpleGrantedAuthority(authority.getAuthority()))
+                .collect(Collectors.toSet());
 
         return new org.springframework.security.core.userdetails.User(
-            user.getUsername(),
-            user.getPassword(),
-            user.isEnabled(),
-            true, true, true, // accountNonExpired, credentialsNonExpired, accountNonLocked
-            grantedAuthorities
-        );
+                user.getUsername(),
+                user.getPassword(),
+                user.isEnabled(),
+                true, true, true, // accountNonExpired, credentialsNonExpired, accountNonLocked
+                grantedAuthorities);
     }
 }

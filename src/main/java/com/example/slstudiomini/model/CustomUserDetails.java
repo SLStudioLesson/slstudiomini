@@ -11,17 +11,18 @@ import org.springframework.security.core.userdetails.UserDetails;
 // Spring Securityの認証クラスとして認識される
 public class CustomUserDetails implements UserDetails {
     // 自作のUserクラスを持つように拡張する
-		private User user;
-		
+    private User user;
+
     public CustomUserDetails(User user) {
         this.user = user;
     }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return user.getAuthorities().stream()
-                    .map(authority -> new SimpleGrantedAuthority(authority.getAuthority()))
-                    .collect(Collectors.toList());
+        return user.getAuthorities()
+                .stream()
+                .map(authority -> new SimpleGrantedAuthority(authority.getAuthority()))
+                .collect(Collectors.toList());
     }
 
     @Override

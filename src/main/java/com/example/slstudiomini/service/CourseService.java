@@ -14,21 +14,22 @@ import jakarta.transaction.Transactional;
 
 @Service
 public class CourseService {
+
     @Autowired
     private CourseRepository courseRepository;
 
-    public List<Course> findAllCources(){
+    public List<Course> findAllCourses() {
         return courseRepository.findAll();
     }
 
-    public Course findCourceById(Long id){
+    public Course findCourseById(Long id) {
         return courseRepository.findById(id)
-                    .orElseThrow(() -> new EntityNotFoundException("Lesson Not Found With id= " + id));
+                .orElseThrow(() -> new EntityNotFoundException("Course Not Found With id = " + id));
     }
 
     @Transactional
-    public Course save(Course course){
-        if ( course != null ) {
+    public Course save(Course course) {
+        if (course != null) {
             course.setCreatedAt(LocalDateTime.now());
             courseRepository.save(course);
         }
@@ -36,8 +37,8 @@ public class CourseService {
     }
 
     @Transactional
-    public Course update(Course updateCourse){
-        Course course = findCourceById(updateCourse.getId());
+    public Course update(Course updateCourse) {
+        Course course = findCourseById(updateCourse.getId());
         course.setName(updateCourse.getName());
         course.setDescription(updateCourse.getDescription());
         course.setUpdatedAt(LocalDateTime.now());
@@ -45,15 +46,13 @@ public class CourseService {
         return courseRepository.save(course);
     }
 
-
     @Transactional
-    public void delete(Course deletedCourse){
-        Course course = findCourceById(deletedCourse.getId());
+    public void delete(Course deletedCourse) {
+        Course course = findCourseById(deletedCourse.getId());
         // コースの削除はdeletedAtに日付を入れる
         course.setDeletedAt(LocalDateTime.now());
         course.getLessons().forEach(lesson -> lesson.setDeletedAt(LocalDateTime.now()));
         courseRepository.save(course);
     }
-
 
 }

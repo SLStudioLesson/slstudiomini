@@ -18,7 +18,7 @@ import com.example.slstudiomini.service.LessonService;
 @Controller
 @RequestMapping("/admin/lessons")
 public class AdminLessonController {
-    
+
     @Autowired
     private LessonService lessonService;
 
@@ -26,29 +26,29 @@ public class AdminLessonController {
     private CourseService courseService;
 
     @GetMapping
-    public String index(Model model){
+    public String index(Model model) {
         List<Lesson> lessons = lessonService.findAllLessons();
         model.addAttribute("lessons", lessons);
         return "admin/lesson-list";
     }
 
     @GetMapping("/add")
-    public String addForm(Model model){
-        List<Course> courses = courseService.findAllCources();
+    public String addForm(Model model) {
+        List<Course> courses = courseService.findAllCourses();
         model.addAttribute("courses", courses);
         model.addAttribute("lesson", new Lesson());
         return "admin/lesson-add";
     }
 
     @PostMapping("/add")
-    public String add(Lesson lesson){
+    public String add(Lesson lesson) {
         lessonService.save(lesson);
         return "redirect:/admin/lessons";
     }
 
     @GetMapping("/edit/{id}")
-    public String editForm(@PathVariable("id") Long id, Model model){
-        List<Course> courses = courseService.findAllCources();
+    public String editForm(@PathVariable("id") Long id, Model model) {
+        List<Course> courses = courseService.findAllCourses();
         Lesson lesson = lessonService.findLessonById(id);
         model.addAttribute("lesson", lesson);
         model.addAttribute("courses", courses);
@@ -56,11 +56,9 @@ public class AdminLessonController {
     }
 
     @PostMapping("/edit")
-    public String edit(Lesson lesson){
+    public String edit(Lesson lesson) {
         lessonService.update(lesson);
         return "redirect:/admin/lessons";
     }
-
-    
 
 }

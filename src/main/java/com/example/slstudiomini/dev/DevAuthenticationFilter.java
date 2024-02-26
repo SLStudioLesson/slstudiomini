@@ -1,4 +1,5 @@
 package com.example.slstudiomini.dev;
+
 import java.io.IOException;
 import java.util.Collections;
 import java.util.HashSet;
@@ -22,11 +23,10 @@ import jakarta.servlet.ServletResponse;
 @Profile("dev")
 public class DevAuthenticationFilter extends GenericFilterBean {
 
-    
     @Override
     public void doFilter(ServletRequest request,
-													ServletResponse response, FilterChain chain)
-						throws IOException, ServletException {
+            ServletResponse response, FilterChain chain)
+            throws IOException, ServletException {
 
         // ダミーの権限を生成
         Authority dummyAuthority = new Authority();
@@ -40,14 +40,11 @@ public class DevAuthenticationFilter extends GenericFilterBean {
         dummyUser.setPassword("dummyPassword");
         dummyUser.setEnabled(true);
         dummyUser.setAuthorities(
-								new HashSet<>(Collections.singletonList(dummyAuthority))
-				);
-
+                new HashSet<>(Collections.singletonList(dummyAuthority)));
 
         CustomUserDetails user = new CustomUserDetails(dummyUser);
-        UsernamePasswordAuthenticationToken authentication = 
-													new UsernamePasswordAuthenticationToken(
-                user, null, user.getAuthorities());
+        UsernamePasswordAuthenticationToken authentication =
+                new UsernamePasswordAuthenticationToken(user, null, user.getAuthorities());
 
         // SecurityContext に設定
         SecurityContextHolder.getContext().setAuthentication(authentication);

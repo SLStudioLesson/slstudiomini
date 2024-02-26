@@ -15,38 +15,39 @@ import jakarta.transaction.Transactional;
 
 @Service
 public class LessonService {
+
     @Autowired
     private LessonRepository lessonRepository;
 
     @Autowired
     private CourseService courseService;
 
-    public List<Lesson> findAllLessons(){
+    public List<Lesson> findAllLessons() {
         return lessonRepository.findAll();
     }
 
-    public Lesson findLessonById(Long id){
+    public Lesson findLessonById(Long id) {
         return lessonRepository.findById(id)
-                    .orElseThrow(() -> new EntityNotFoundException("Lesson Not Found With id= " + id));
+                .orElseThrow(() -> new EntityNotFoundException("Lesson Not Found With id= " + id));
     }
 
     @Transactional
-    public Lesson save(Lesson lesson){
+    public Lesson save(Lesson lesson) {
         lesson.setCreatedAt(LocalDateTime.now());
         return lessonRepository.save(lesson);
     }
 
     @Transactional
-    public Lesson update(Lesson updateLesson){
+    public Lesson update(Lesson updateLesson) {
         Lesson lesson = findLessonById(updateLesson.getId());
-        
+
         lesson.setUpdatedAt(LocalDateTime.now());
         lesson.setName(updateLesson.getName());
         lesson.setContent(updateLesson.getContent());
         lesson.setDescription(updateLesson.getDescription());
         lesson.setUpdatedAt(LocalDateTime.now());
 
-        Course course = courseService.findCourceById(updateLesson.getCourse().getId());
+        Course course = courseService.findCourseById(updateLesson.getCourse().getId());
         lesson.setCourse(course);
         return lessonRepository.save(lesson);
     }
