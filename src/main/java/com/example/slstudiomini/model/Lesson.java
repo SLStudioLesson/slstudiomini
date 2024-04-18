@@ -109,5 +109,4 @@ public class Lesson {
     public void setDeletedAt(LocalDateTime deletedAt) {
         this.deletedAt = deletedAt;
     }
-
 }

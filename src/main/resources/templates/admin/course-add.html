@@ -1,17 +1,16 @@
 <!DOCTYPE html>
-<html lang="ja" th:replace="~{layout/admin/base :: layout(~{::title},~{::body/content()})}">
+<html lang="ja" xmlns:th="http://www.thymeleaf.org"
+        th:replace="~{layout/admin/base :: layout(~{::title},~{::body/content()})}">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SLStudio Mini 管理画面</title>
 </head>
 <body>
     <h1>コース追加</h1>
-
     <div class="container-fluid">
         <div class="row mb-3">
             <div class="col align-self-center">
-                <form th:action="@{/admin/courses/add}" method="post" th:object="${course}">
+                <form th:action="@{/admin/courses/add}" th:method="post" th:object="${course}">
                     <div class="mb-3">
                         <div class="row">
                             <div class="col">
@@ -21,26 +20,21 @@
                             <div class="col"></div>
                             <div class="col"></div>
                         </div>
-                        
                     </div>
                     <div class="mb-3">
                         <div class="row">
                             <div class="col">
                                 <label for="description" class="form-label">コースの説明</label>
-                        <textarea class="form-control" id="description" th:field="*{description}" rows="3"></textarea>
+                                <textarea class="form-control" id="description" th:field="*{description}" rows="3"></textarea>
                             </div>
                             <div class="col"></div>
                             <div class="col"></div>
                         </div>
-                        
                     </div>
                     <button type="submit" class="btn btn-success">コース作成</button>
                 </form>
-
             </div>
         </div>
-        
     </div>
-
 </body>
 </html>

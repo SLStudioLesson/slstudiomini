@@ -5,6 +5,6 @@ import org.springframework.stereotype.Repository;
 
 import com.example.slstudiomini.model.Lesson;
 @Repository
-public interface LessonRepository extends JpaRepository<Lesson, Long>{
+public interface LessonRepository extends JpaRepository<Lesson, Long> {
     
 }

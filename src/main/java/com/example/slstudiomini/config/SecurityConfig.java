@@ -19,7 +19,8 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http.formLogin(login -> login
+        http
+            .formLogin(login -> login
                 // ログイン成功時に遷移するURL
                 .defaultSuccessUrl("/")
                 // ログイン処理を行うURL(POST)
@@ -30,12 +31,12 @@ public class SecurityConfig {
                 // .failureUrl("/login?error")
                 // これを付けたページはログイン無しでもアクセス出来る
                 // .permitAll()
-        ).logout(logout -> logout
+            ).logout(logout -> logout
                 .logoutSuccessUrl("/")
-        ).authorizeHttpRequests(authz -> authz
+            ).authorizeHttpRequests(authz -> authz
                 // resourceフォルダの直下(cssやimg)は認証が無くてもアクセスできる
                 .requestMatchers(PathRequest.toStaticResources()
-																						.atCommonLocations()).permitAll()
+                    .atCommonLocations()).permitAll()
                 // URL「/」にはログイン無しでもアクセスできる
                 // .requestMatchers("/").permitAll()
                 .requestMatchers("/api/**").permitAll()
@@ -44,11 +45,11 @@ public class SecurityConfig {
                 // /admin 以降のURLにはロールが「ADMIN」のみアクセス出来る
                 .requestMatchers("/admin/**").hasRole("ADMIN")
                 .anyRequest().authenticated()
-        );
+            );
         return http.build();
     }
 
-		// これを書いておくとパスワードがハッシュ化されます
+    // これを書いておくとパスワードがハッシュ化されます
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();

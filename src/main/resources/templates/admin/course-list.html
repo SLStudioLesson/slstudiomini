@@ -1,13 +1,12 @@
 <!DOCTYPE html>
-<html lang="ja" th:replace="~{layout/admin/base :: layout(~{::title},~{::body/content()})}">
+<html lang="ja" xmlns:th="http://www.thymeleaf.org"
+        th:replace="~{layout/admin/base :: layout(~{::title},~{::body/content()})}">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SLStudio Mini 管理画面</title>
 </head>
 <body>
     <h1>コース一覧</h1>
-
     <div class="container-fluid">
         <div class="row mb-3">
             <div class="col">
@@ -19,8 +18,8 @@
                             <th scope="col">コース説明</th>
                             <th scope="col">操作</th>
                         </tr>
-                        </thead>
-                        <tbody>
+                    </thead>
+                    <tbody>
                         <tr th:each="course : ${courses}">
                             <th scope="row" th:text="${course.id}"></th>
                             <td th:text="${course.name}"></td>
@@ -30,14 +29,11 @@
                                 <a th:href="@{/admin/courses/delete/{id}(id=${course.id})}">削除</a>
                             </td>
                         </tr>
-                        </tbody>
+                    </tbody>
                 </table>
             </div>
         </div>
     </div>
-
-
-
-    <a href="/admin/courses/add">新規コース作成</a>
+    <a th:href="@{/admin/courses/add}">新規コース作成</a>
 </body>
 </html>

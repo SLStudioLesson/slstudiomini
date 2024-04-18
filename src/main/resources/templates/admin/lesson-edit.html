@@ -1,17 +1,16 @@
 <!DOCTYPE html>
-<html lang="ja" th:replace="~{layout/admin/base :: layout(~{::title},~{::body/content()})}">
+<html lang="ja" xmlns:th="http://www.thymeleaf.org"
+        th:replace="~{layout/admin/base :: layout(~{::title},~{::body/content()})}">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SLStudio Mini 管理画面</title>
 </head>
 <body>
     <h1>レッスン編集</h1>
-
     <div class="container-fluid">
         <div class="row mb-3">
             <div class="col align-self-center">
-                <form th:action="@{/admin/lessons/edit}" method="post" th:object="${lesson}">
+                <form th:action="@{/admin/lessons/edit}" th:method="post" th:object="${lesson}">
                     <input type="hidden" th:field="*{id}">
                     <div class="mb-3">
                         <div class="row">
@@ -35,7 +34,6 @@
                             <div class="col"></div>
                             <div class="col"></div>
                         </div>
-                        
                     </div>
                     <div class="mb-3">
                         <div class="row">
@@ -55,14 +53,10 @@
                             </div>
                         </div>
                     </div>
-                    
                     <button type="submit" class="btn btn-success">レッスン編集</button>
                 </form>
-
             </div>
         </div>
-        
     </div>
-
 </body>
 </html>

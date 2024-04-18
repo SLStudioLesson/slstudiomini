@@ -15,7 +15,6 @@ import jakarta.transaction.Transactional;
 
 @Service
 public class LessonService {
-
     @Autowired
     private LessonRepository lessonRepository;
 
@@ -28,7 +27,7 @@ public class LessonService {
 
     public Lesson findLessonById(Long id) {
         return lessonRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("Lesson Not Found With id= " + id));
+            .orElseThrow(() -> new EntityNotFoundException("Lesson Not Found With id= " + id));
     }
 
     @Transactional

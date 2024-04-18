@@ -2,6 +2,7 @@ package com.example.slstudiomini.model;
 
 import java.util.Set;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -12,11 +13,11 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "authorities")
 public class Authority {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column
     private String authority;
 
     @ManyToMany(mappedBy = "authorities")
@@ -54,5 +55,4 @@ public class Authority {
     public void setUser(Set<User> user) {
         this.user = user;
     }
-
 }

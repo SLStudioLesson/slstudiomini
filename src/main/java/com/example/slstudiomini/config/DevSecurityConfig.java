@@ -23,8 +23,8 @@ public class DevSecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-        .addFilterBefore(new DevAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class)
-        .formLogin(login -> login
+            .addFilterBefore(new DevAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class)
+            .formLogin(login -> login
                 // ログイン成功時に遷移するURL
                 .defaultSuccessUrl("/")
                 // ログイン処理を行うURL(POST)
@@ -35,9 +35,9 @@ public class DevSecurityConfig {
                 // .failureUrl("/login?error")
                 // これを付けたページはログイン無しでもアクセス出来る
                 // .permitAll()
-        ).logout(logout -> logout
+            ).logout(logout -> logout
                 .logoutSuccessUrl("/")
-        ).authorizeHttpRequests(authz -> authz
+            ).authorizeHttpRequests(authz -> authz
                 // resourceフォルダの直下(cssやimg)は認証が無くてもアクセスできる
                 .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
                 // URL「/」にはログイン無しでもアクセスできる
@@ -47,16 +47,12 @@ public class DevSecurityConfig {
                 // /admin 以降のURLにはロールが「ADMIN」のみアクセス出来る
                 .requestMatchers("/admin/**").hasRole("ADMIN")
                 .anyRequest().authenticated()
-        );
-
-        
+            );
         return http.build();
     }
-
 
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
-
 }

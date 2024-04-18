@@ -18,7 +18,6 @@ import jakarta.persistence.Table;
 @SQLRestriction("deleted_at IS NULL")
 @Table(name = "courses")
 public class Course {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -99,5 +98,4 @@ public class Course {
     public void setDeletedAt(LocalDateTime deletedAt) {
         this.deletedAt = deletedAt;
     }
-
 }

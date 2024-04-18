@@ -16,7 +16,6 @@ import com.example.slstudiomini.service.CourseService;
 @Controller
 @RequestMapping("/admin/courses")
 public class AdminCourseController {
-
     @Autowired
     private CourseService courseService;
 
@@ -64,5 +63,4 @@ public class AdminCourseController {
         courseService.delete(course);
         return "redirect:/admin/courses";
     }
-
 }

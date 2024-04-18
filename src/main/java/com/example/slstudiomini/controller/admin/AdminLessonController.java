@@ -18,7 +18,6 @@ import com.example.slstudiomini.service.LessonService;
 @Controller
 @RequestMapping("/admin/lessons")
 public class AdminLessonController {
-
     @Autowired
     private LessonService lessonService;
 
@@ -60,5 +59,4 @@ public class AdminLessonController {
         lessonService.update(lesson);
         return "redirect:/admin/lessons";
     }
-
 }

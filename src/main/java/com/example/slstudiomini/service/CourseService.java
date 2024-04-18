@@ -14,7 +14,6 @@ import jakarta.transaction.Transactional;
 
 @Service
 public class CourseService {
-
     @Autowired
     private CourseRepository courseRepository;
 
@@ -24,7 +23,7 @@ public class CourseService {
 
     public Course findCourseById(Long id) {
         return courseRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("Course Not Found With id = " + id));
+            .orElseThrow(() -> new EntityNotFoundException("Course Not Found With id = " + id));
     }
 
     @Transactional
@@ -54,5 +53,4 @@ public class CourseService {
         course.getLessons().forEach(lesson -> lesson.setDeletedAt(LocalDateTime.now()));
         courseRepository.save(course);
     }
-
 }
